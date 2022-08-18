@@ -1,6 +1,15 @@
 from django.db import models
 from datetime import date
 
+from user.models import User
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=30)    
+    
+    def __str__(self) -> str:
+        return self.name
+
 
 class Book(models.Model):
     name = models.CharField(max_length=80)
@@ -12,6 +21,8 @@ class Book(models.Model):
     date_rented = models.DateTimeField(blank=True, null=True)
     date_devolution = models.DateTimeField(blank=True, null=True)
     time_duration = models.DateField(blank=True, null=True)
+    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     
     def __str__(self) -> str:
-        return self.name
+        return self.name    
