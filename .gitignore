@@ -1,3 +1,4 @@
 .library/
 db.sqlite3
 __pycache__/
+books.txt

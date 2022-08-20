@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Seus Livros{% endblock %}
+{% block title %}Your Books{% endblock %}
 
 {% block content %}
 
@@ -18,8 +18,8 @@
                             {{ book.category }}
                         </h6>
                         <p class="card-text">
-                            Disponível
-                            {% if not book.rented %}                                
+                            Borrowed
+                            {% if book.borrowed %}                                
                                 <svg style="color: green;" xmlns="http://www.w3.org/2000/svg"
                                     width="16" height="16" fill="currentColor"
                                     class="bibi-check-square-fill" viewBox="0 0 16 16">
@@ -34,13 +34,17 @@
                         </p>
                         
                         <a href="{% url 'info_book' book.id %}" class="btn btn-info mt-2">
-                            Acessar
+                            View More
                         </a>
                     </div>
                 </div>
             </div>
         {% endfor %}
     </div>
+
+    <br><br><br>
+    <a href="{% url 'logout' %}" class="btn btn-danger">Exit</a>
+
 </div>
 
 {% endblock %}
