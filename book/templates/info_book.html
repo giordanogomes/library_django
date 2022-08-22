@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load filters %}
+
 {% block title %}{{ book.name }}{% endblock %}
 
 {% block content %}
@@ -74,7 +76,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Date Borrowed</th>            
                 <th scope="col">Date Devolution</th>
-                <th scope="col">Book</th>
+                <th scope="col">Time Duration</th>            
             </tr>
         </thead>
         <tbody>
@@ -86,8 +88,8 @@
                         <th scope="row">{{ b.name_borrowed_anonymous }}</th>
                     {% endif %}
                     <td>{{ b.date_borrowed }}</td>
-                    <td>{{ b.date_devolution }}</td>
-                    <td>{{ b.book }}</td>
+                    <td>{{ b.date_devolution }}</td>                    
+                    <td>{{ b.date_devolution|time_duration:b.date_borrowed }} days</td>
                 </tr>
             {% endfor %}
         </tbody>

@@ -62,7 +62,8 @@ def validate_login(request):
         return render(request, "login.html")
     elif len(user) > 0:
         request.session["user"] = user[0].id
-        return redirect("/book/home/")
+        messages.success(request, "Login Validado.")
+        return redirect("home")
 
     return HttpResponse(f"{email} - {password}")
 

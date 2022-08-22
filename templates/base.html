@@ -18,10 +18,42 @@
             <a href="/book/home" class="navbar-brand mb-0 h1">
                 Library
             </a>
+            {% if logged_user %}
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" 
+                    data-bs-target="#exampleModal" style="margin-right: -920px;">
+                    Register Book
+                </button>
+                <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>                
+            {% endif %}
         </div>
     </nav>
 
     {% block content %}{% endblock %}
+
+    {% if logged_user %}
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" 
+            aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Register Book</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" 
+                        aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'register_book' %}" method="post">
+                        {% csrf_token %}
+                        <table>{{ form.as_table }}</table>
+                        <input type="submit" value="Register" class="btn btn-success mt-4">
+                    </form>
+                </div>                
+            </div>
+        </div>
+        </div>
+    {% endif %}
 
     <!-- Bootstrap core JavaScript -->
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
