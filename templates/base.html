@@ -15,14 +15,14 @@
 <body>
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-            <a href="/book/home" class="navbar-brand mb-0 h1">
+            <a href="{% url 'home' %}" class="navbar-brand mb-0 h1">
                 Library
             </a>
             {% if logged_user %}
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" 
-                    data-bs-target="#exampleModal" style="margin-right: -920px;">
-                    Register Book
+                    data-bs-target="#exampleModal" style="margin-right: 0px;">
+                    Register
                 </button>
                 <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>                
             {% endif %}
@@ -35,25 +35,84 @@
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" 
             aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Register Book</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" 
-                        aria-label="Close">
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="{% url 'register_book' %}" method="post">
-                        {% csrf_token %}
-                        <table>{{ form.as_table }}</table>
-                        <input type="submit" value="Register" class="btn btn-success mt-4">
-                    </form>
-                </div>                
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Register</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" 
+                            aria-label="Close">
+                        </button>
+                    </div>
+
+                    <div class="modal-body" >
+                        <button onclick="form_register(1)" type="button" class="btn btn-secondary">
+                            Category
+                        </button>
+                        <button onclick="form_register(2)" type="button" class="btn btn-secondary">
+                            Book
+                        </button>
+                        <button onclick="form_register(3)" type="button" class="btn btn-secondary">
+                            Borrowing
+                        </button>
+                        <br>
+                        <hr>
+
+                        <div style="display: none;" id="book">
+                            <form action="{% url 'register_book' %}" method="post">
+                                {% csrf_token %}
+                                <table>{{ form_book.as_table }}</table>
+                                <input type="submit" value="Register" class="btn btn-success mt-4">
+                            </form>
+                        </div>  
+
+                        <div style="display: none;" id="category">
+                            <form action="{% url 'register_category' %}" method="post">
+                                {% csrf_token %}                                
+                                <table>{{ form_category.as_table }}</table>
+                                <input type="hidden" value="{{ logged_user }}">
+                                <input type="submit" value="Register" class="btn btn-success mt-4">
+                            </form>
+                        </div>  
+                                              
+                        <div style="display: none;" id="borrowing">
+                            <form action="#" method="post">
+                                {% csrf_token %}                                
+                                <table>{{ form_borrowing.as_table }}</table>
+                                <input type="submit" value="Register" class="btn btn-success mt-4">
+                            </form>
+                        </div> 
+                    </div>
+                    
+                </div>            
             </div>
-        </div>
+
         </div>
     {% endif %}
+
+    <script>
+        function form_register(value){
+            category = document.getElementById("category")
+            book = document.getElementById("book")
+            borrowing = document.getElementById("borrowing")
+
+            if (value == 1){
+                category.style.display = "block"
+                book.style.display = "none"
+                borrowing.style.display = "none"
+            }
+            else if (value == 2){
+                book.style.display = "block"
+                category.style.display = "none"
+                borrowing.style.display = "none"
+            }
+            else if (value == 3){
+                borrowing.style.display = "block"
+                book.style.display = "none"
+                category.style.display = "none"
+            }
+        }
+    </script>
 
     <!-- Bootstrap core JavaScript -->
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>

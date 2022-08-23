@@ -4,13 +4,16 @@
 
 {% block content %}
 
+
+{% include 'parciais/_messages.html' %}
+
 <div class="container mt-3">
     <div class="row">
         {% for book in books %}
-            <div class="col-md">
-                <div class="card" style="width: 18rem;">
+            <div class="col-md-4">
+                <div class="card mb-4" style="width: 18rem;">
                     <div class="card-body">
-                        <h4 class="card-title">{{ book.name }}</h4>  
+                        <h3 class="card-title">{{ book.name }}</h3>  
                         <h5 class="card-subtitle mb-2 text-muted">
                             {{ book.author }}
                         <h5>

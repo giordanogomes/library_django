@@ -6,6 +6,25 @@
 
 {% block content %}
 
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" 
+    aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Do you really want to delete book?
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" 
+                    aria-label="Close">                    
+                </button>
+                </div>
+                <div class="modal-body">
+                <a href="{% url 'del_book' id_book %}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+</div>
+
 <div class="container mt-3">
 
     <form action="#" method="post">
@@ -65,6 +84,10 @@
         </div>
 
         <button class="btn btn-success mt-3">Save</button>
+        <button type="button" class="btn btn-danger mt-3" data-bs-toggle="modal" 
+            data-bs-target="#exampleModal2" style="margin-left: 40px;">
+            Delete Book
+        </button>   
 
     </form>
 
