@@ -16,15 +16,15 @@
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
             <a href="{% url 'home' %}" class="navbar-brand mb-0 h1">
-                Library
+                Biblioteca
             </a>
             {% if logged_user %}
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" 
                     data-bs-target="#exampleModal" style="margin-right: 0px;">
-                    Register
+                    Cadastrar
                 </button>
-                <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>                
+                <a href="{% url 'logout' %}" class="btn btn-danger">Sair</a>                
             {% endif %}
         </div>
     </nav>
@@ -39,21 +39,24 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Register</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Cadastrar</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" 
                             aria-label="Close">
                         </button>
                     </div>
 
                     <div class="modal-body" >
-                        <button onclick="form_register(1)" type="button" class="btn btn-secondary">
-                            Category
+                        <button onclick="form_register(1)" type="button" class="btn btn-secondary"
+                                style="margin-left: 5px;">
+                            Categoria
                         </button>
-                        <button onclick="form_register(2)" type="button" class="btn btn-secondary">
-                            Book
+                        <button onclick="form_register(2)" type="button" class="btn btn-secondary"
+                                style="margin-left: 90px;">
+                            Livro
                         </button>
-                        <button onclick="form_register(3)" type="button" class="btn btn-secondary">
-                            Borrowing
+                        <button onclick="form_register(3)" type="button" class="btn btn-secondary"
+                                style="margin-left: 90px;">
+                            Empréstimo
                         </button>
                         <br>
                         <hr>
@@ -62,7 +65,7 @@
                             <form action="{% url 'register_book' %}" method="post">
                                 {% csrf_token %}
                                 <table>{{ form_book.as_table }}</table>
-                                <input type="submit" value="Register" class="btn btn-success mt-4">
+                                <input type="submit" value="Cadastrar" class="btn btn-success mt-4">
                             </form>
                         </div>  
 
@@ -71,15 +74,15 @@
                                 {% csrf_token %}                                
                                 <table>{{ form_category.as_table }}</table>
                                 <input type="hidden" value="{{ logged_user }}">
-                                <input type="submit" value="Register" class="btn btn-success mt-4">
+                                <input type="submit" value="Cadastrar" class="btn btn-success mt-4">
                             </form>
                         </div>  
                                               
                         <div style="display: none;" id="borrowing">
-                            <form action="#" method="post">
+                            <form action="{% url 'register_borrowing' %}" method="post">
                                 {% csrf_token %}                                
                                 <table>{{ form_borrowing.as_table }}</table>
-                                <input type="submit" value="Register" class="btn btn-success mt-4">
+                                <input type="submit" value="Emprestar" class="btn btn-success mt-4">
                             </form>
                         </div> 
                     </div>

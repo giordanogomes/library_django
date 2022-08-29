@@ -9,7 +9,7 @@ class BookAdmin(admin.ModelAdmin):
 
 
 class BorrowingAdmin(admin.ModelAdmin):
-    list_display = ("name_borrowed", "name_borrowed_anonymous", "book")
+    list_display = ("username", "book")
 
 
 class CategoryAdmin(admin.ModelAdmin):

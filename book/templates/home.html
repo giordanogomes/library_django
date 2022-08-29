@@ -1,14 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}Your Books{% endblock %}
+{% block title %}Seus Livros{% endblock %}
 
 {% block content %}
 
-
-{% include 'parciais/_messages.html' %}
-
 <div class="container mt-3">
     <div class="row">
+        {% include 'parciais/_messages.html' %}
         {% for book in books %}
             <div class="col-md-4">
                 <div class="card mb-4" style="width: 18rem;">
@@ -21,7 +19,7 @@
                             {{ book.category }}
                         </h6>
                         <p class="card-text">
-                            Borrowed
+                            Emprestado
                             {% if book.borrowed %}                                
                                 <svg style="color: green;" xmlns="http://www.w3.org/2000/svg"
                                     width="16" height="16" fill="currentColor"
@@ -37,7 +35,7 @@
                         </p>
                         
                         <a href="{% url 'info_book' book.id %}" class="btn btn-info mt-2">
-                            View More
+                            Exibir
                         </a>
                     </div>
                 </div>

@@ -18,12 +18,12 @@ class RegisterCategory(forms.ModelForm):
     class Meta:
         model = Category
         fields = "__all__"
-        
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["user"].widget = forms.HiddenInput()
-        
-        
+
+
 class RegisterBorrowing(forms.ModelForm):
     class Meta:
         model = Borrowing

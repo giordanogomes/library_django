@@ -12,14 +12,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                    Do you really want to delete book?
+                    Deseja realmente deletar o livro?
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" 
                     aria-label="Close">                    
                 </button>
                 </div>
                 <div class="modal-body">
-                <a href="{% url 'del_book' id_book %}" class="btn btn-danger">Delete</a>
+                <a href="{% url 'del_book' id_book %}" class="btn btn-danger">Deletar</a>
                 </div>
             </div>
         </div>
@@ -31,34 +31,34 @@
         {% csrf_token %}
 
         <p>
-            <h6>Book Name:</h6>
+            <h6>Nome do Livro:</h6>
             <input style="width: 40%;" class="form-control" type="text" 
                 value="{{ book.name }}"
             >
         </p>
 
         <p>
-            <h6>Author:</h6>
+            <h6>Autor:</h6>
             <input style="width: 40%;" class="form-control" type="text" 
                 value="{{ book.author }}"
             >
         </p>
 
         <p>
-            <h6>Co-author:</h6>
+            <h6>Co-autor:</h6>
             <input style="width: 40%;" class="form-control" type="text" 
                 value="{{ book.co_author }}"
             >
         </p>
 
         <p>
-            <h6>Registration Date: </h6>
+            <h6>Data de cadastro: </h6>
             <input style="width: 40%;" class="form-control" type="text" 
                 value="{{ book.registration_date }}"
             >        
         </p>
 
-        <h6>Category:</h6>
+        <h6>Categoria:</h6>
         <select class="form-select mb-4" style="width:20%;" name="category">
             {% for category in category_book %}
                 {% if category.name == book.category.name %}
@@ -70,7 +70,7 @@
         </select>
 
         <div>
-                <h5>Borrowed &nbsp;       
+                <h5>Emprestado &nbsp;       
                 {% if book.borrowed %}   
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked
                         style="transform:scale(1.0);"
@@ -83,36 +83,39 @@
             </h5>
         </div>
 
-        <button class="btn btn-success mt-3">Save</button>
+        <button class="btn btn-success mt-3">Salvar</button>
+        <a href="{% url 'return_book' id_book %}" class="btn btn-warning mt-3"
+            style="margin-left: 40px;">
+            Devolver Livro
+        </a>
         <button type="button" class="btn btn-danger mt-3" data-bs-toggle="modal" 
             data-bs-target="#exampleModal2" style="margin-left: 40px;">
-            Delete Book
-        </button>   
-
-    </form>
+            Deletar Livro
+        </button> 
 
     <hr class="mt-5">
-    <h3>Borrowing History</h3>
+    <h3>Histórico de Empréstimos</h3>
     <table class="table table-striped mb-5 mt-4">
         <thead>
             <tr>                
-                <th scope="col">Name</th>
-                <th scope="col">Date Borrowed</th>            
-                <th scope="col">Date Devolution</th>
-                <th scope="col">Time Duration</th>            
+                <th scope="col">Nome</th>
+                <th scope="col">Data de empréstimo</th>            
+                <th scope="col">Data de devolução</th>
+                <th scope="col">Tempo de duração</th>            
             </tr>
         </thead>
         <tbody>
             {% for b in borrowing %}
-                <tr>
-                    {% if b.name_borrowed_anonymous == None %}
-                        <th scope="row">{{ b.name_borrowed }}</th>
-                    {% else %}
-                        <th scope="row">{{ b.name_borrowed_anonymous }}</th>
-                    {% endif %}
+                <tr>                    
+                    <th scope="row">{{ b.username }}</th>
                     <td>{{ b.date_borrowed }}</td>
-                    <td>{{ b.date_devolution }}</td>                    
-                    <td>{{ b.date_devolution|time_duration:b.date_borrowed }} days</td>
+                    {% if b.date_devolution %}
+                        <td>{{ b.date_devolution }}</td>                    
+                        <td>{{ b.date_devolution|time_duration:b.date_borrowed }} dias</td>
+                    {% else %}
+                        <td>-</td>
+                        <td>-</td>                        
+                    {% endif %}
                 </tr>
             {% endfor %}
         </tbody>

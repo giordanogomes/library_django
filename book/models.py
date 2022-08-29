@@ -5,35 +5,43 @@ from user.models import User
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=30)
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    name = models.CharField("Nome", max_length=30)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name="Usuário")
+
+    class Meta:
+        verbose_name = "Categoria"
 
     def __str__(self) -> str:
         return self.name
 
 
 class Book(models.Model):
-    name = models.CharField(max_length=80)
-    author = models.CharField(max_length=50)
-    co_author = models.CharField(max_length=50, blank=True)
-    registration_date = models.DateField(default=date.today)
-    borrowed = models.BooleanField(default=False)
-    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    name = models.CharField("Nome", max_length=80)
+    author = models.CharField("Autor", max_length=50)
+    co_author = models.CharField("Co-autor", max_length=50, blank=True)
+    registration_date = models.DateField("Data de cadastro", default=date.today)
+    borrowed = models.BooleanField("Emprestado", default=False)
+    category = models.ForeignKey(
+        Category, on_delete=models.DO_NOTHING, verbose_name="Categoria"
+    )
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name="Usuário")
+
+    class Meta:
+        verbose_name = "Livro"
 
     def __str__(self) -> str:
         return self.name
 
 
 class Borrowing(models.Model):
-    name_borrowed = models.ForeignKey(
-        User, on_delete=models.DO_NOTHING, blank=True, null=True
-    )
-    name_borrowed_anonymous = models.CharField(max_length=50, blank=True, null=True)
-    date_borrowed = models.DateField(blank=True, null=True)
-    date_devolution = models.DateField(blank=True, null=True)
+    username = models.CharField("Nome do Usuário", max_length=50)
+    date_borrowed = models.DateField("Data de empéstimo", default=date.today)
+    date_devolution = models.DateField("Data de devolução", blank=True, null=True)
     # time_duration = models.DateField(blank=True, null=True)
-    book = models.ForeignKey(Book, on_delete=models.DO_NOTHING)
+    book = models.ForeignKey(Book, on_delete=models.DO_NOTHING, verbose_name="Livro")
+
+    class Meta:
+        verbose_name = "Empréstimo"
 
     def __str__(self) -> str:
-        return f"{self.name_borrowed} | {self.book}"
+        return f"{self.username} | {self.book}"
