@@ -94,7 +94,7 @@ def register_book(request):
 
 def del_book(request, id):
     book = Book.objects.get(id=id).delete()
-    messages.warning(request, "lIVRO DELETADO COM SUCESSO!")
+    messages.error(request, "lIVRO DELETADO COM SUCESSO!")
     return redirect("home")
 
 
@@ -137,7 +137,7 @@ def register_borrowing(request):
 def return_book(request, id):
     book = Book.objects.get(id=id)
     if book.borrowed == False:
-        messages.error(request, "O LIVRO JÁ FOI DEVOLVIDO.")
+        messages.error(request, "O LIVRO NÃO ESTÁ EMPRESTADO.")
         return redirect("home")
     else:
         book.borrowed = False

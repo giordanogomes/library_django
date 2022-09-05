@@ -38,7 +38,9 @@ class Borrowing(models.Model):
     date_borrowed = models.DateField("Data de empéstimo", default=date.today)
     date_devolution = models.DateField("Data de devolução", blank=True, null=True)
     # time_duration = models.DateField(blank=True, null=True)
-    book = models.ForeignKey(Book, on_delete=models.DO_NOTHING, verbose_name="Livro")
+    book = models.ForeignKey(
+        Book, on_delete=models.SET_NULL, verbose_name="Livro", blank=True, null=True
+    )
 
     class Meta:
         verbose_name = "Empréstimo"
