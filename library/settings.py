@@ -3,6 +3,8 @@ from pathlib import Path
 import os
 from django.contrib.messages import constants
 from decouple import config
+import dj_database_url
+import django_on_heroku
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -139,6 +141,7 @@ MESSAGE_TAGS = {
 }
 
 # Heroku: Update database configuration from $DATABASE_URL.
-import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+
+django_on_heroku.settings(locals())
