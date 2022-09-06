@@ -11,7 +11,7 @@ from .views import (
 )
 
 urlpatterns = [
-    path("inicio/", home, name="home"),
+    path("", home, name="home"),
     path("info_livro/<int:id>", info_book, name="info_book"),
     path("cadastrar_livro/", register_book, name="register_book"),
     path("del_livro/<int:id>", del_book, name="del_book"),
