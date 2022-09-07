@@ -46,7 +46,7 @@ def validate_register(request):
         messages.success(request, "USUÁRIO CADASTRADO COM SUCESSO!")
         return redirect("login")
     except:
-        messages.error(request, "ERRO INTERNO DO SISTEMA")
+        messages.error(request, "ERRO INTERNO NO SISTEMA")
         return redirect("register")
 
 
