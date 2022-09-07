@@ -36,7 +36,7 @@ def home(request):
             },
         )
     else:
-        messages.error(request, "FAÇA LOGIN PARA ENTRAR NO SISTEMA.")
+        messages.error(request, "FAÇA LOGIN OU CADASTRE-SE PARA ENTRAR NO SISTEMA.")
         return redirect("login")
 
 
