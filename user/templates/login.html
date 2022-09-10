@@ -9,7 +9,7 @@
         <div class="col-md-2"></div>
         <div class="col-md">
             <h2 class="mb-4">Login</h2>
-            <form method="POST" action="{% url 'validate_login' %}">                
+            <form method="POST" action="{% url 'login' %}">                
                 {% csrf_token %}
                 {% include 'parciais/_messages.html' %}
                 <div class="form-group">
@@ -27,6 +27,9 @@
                   style="margin-left: 20px;">
                     Cadastrar
                 </a>
+                <div class="mt-4">
+                    {{ captcha }}
+                </div>
             </form>
         </div>
         <div class="col-md-2"></div>

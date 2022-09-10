@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "book.apps.BookConfig",
     "user.apps.UserConfig",
     "django_extensions",
+    "captcha",
 ]
 
 MIDDLEWARE = [

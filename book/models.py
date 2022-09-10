@@ -6,7 +6,13 @@ from user.models import User
 
 class Category(models.Model):
     name = models.CharField("Nome", max_length=30)
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name="Usuário")
+    user = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        verbose_name="Usuário",
+        blank=True,
+        null=True,
+    )
 
     class Meta:
         verbose_name = "Categoria"
@@ -22,9 +28,19 @@ class Book(models.Model):
     registration_date = models.DateField("Data de cadastro", default=date.today)
     borrowed = models.BooleanField("Emprestado", default=False)
     category = models.ForeignKey(
-        Category, on_delete=models.DO_NOTHING, verbose_name="Categoria"
+        Category,
+        on_delete=models.SET_NULL,
+        verbose_name="Categoria",
+        blank=True,
+        null=True,
     )
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name="Usuário")
+    user = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        verbose_name="Usuário",
+        blank=True,
+        null=True,
+    )
 
     class Meta:
         verbose_name = "Livro"
